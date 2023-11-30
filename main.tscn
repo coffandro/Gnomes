@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://du4lp0lo65yne"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_3c688"]
+[ext_resource type="PackedScene" uid="uid://cv24smonewnfn" path="res://Enemies/BasicGnome.tscn" id="2_f61yo"]
+[ext_resource type="PackedScene" uid="uid://xin02ce8ux4s" path="res://Player.tscn" id="3_0yx3y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_frml5"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0wkyl"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3i15q"]
+size = Vector3(5, 2, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1o06p"]
+size = Vector3(5, 2, 5)
+
+[sub_resource type="Curve3D" id="Curve3D_rrjmj"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -7.99018, -5.96046e-05, -2.37854, 0, 0, 0, 0, 0, 0, 0.085012, -5.96046e-05, 4.26819, 0, 0, 0, 0, 0, 0, 7.86868, -0.0139756, -1.21244),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Main" type="Node" groups=["World"]]
+script = ExtResource("1_3c688")
+mob_scene = ExtResource("2_f61yo")
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 6, 2)
+
+[node name="Ground" type="StaticBody3D" parent="." groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" groups=["World"]]
+mesh = SubResource("BoxMesh_frml5")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" groups=["World"]]
+shape = SubResource("BoxShape3D_0wkyl")
+
+[node name="Castle" type="Area3D" parent="." groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -10)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Castle" groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("BoxMesh_3i15q")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Castle" groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_1o06p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." groups=["World"]]
+transform = Transform3D(0.975107, 0, 0.221736, -0.0956518, 0.902172, 0.420639, -0.200044, -0.431377, 0.879714, 0, 8.27977, 0)
+
+[node name="SpawnPath" type="Path3D" parent="." groups=["World"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.510802, 0)
+curve = SubResource("Curve3D_rrjmj")
+
+[node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" groups=["World"]]
+transform = Transform3D(-0.635512, 0, -0.772091, 0, 1, 0, 0.772091, 0, -0.635512, -7.99018, -5.96046e-05, -2.37854)
+
+[node name="MobTimer" type="Timer" parent="." groups=["World"]]
+autostart = true
+
+[node name="UserInterface" type="Control" parent="." groups=["World"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="UserInterface" groups=["World"]]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 344.0
+offset_bottom = 63.0
+max_value = 10.0
+
+[node name="Player" parent="." instance=ExtResource("3_0yx3y")]
+transform = Transform3D(-8.73049e-05, 0, -1, 0, 1, 0, 1, 0, -8.73049e-05, 0, 3, -10)
+
+[connection signal="body_entered" from="Castle" to="." method="_on_castle_body_entered"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
