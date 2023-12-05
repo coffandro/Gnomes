@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://xin02ce8ux4s"]
+[gd_scene load_steps=5 format=3 uid="uid://xin02ce8ux4s"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_jvqoj"]
+[ext_resource type="PackedScene" uid="uid://dhe8m4w56e4xe" path="res://Bullets/Bullet.tscn" id="2_angnb"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6w2ya"]
 top_radius = 2.0
@@ -8,15 +9,19 @@ bottom_radius = 2.0
 height = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_04o30"]
-size = Vector3(2, 0.9, 0.9)
+size = Vector3(0.9, 0.9, 2)
 
 [node name="Player" type="Node3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_jvqoj")
+Bullet = ExtResource("2_angnb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_6w2ya")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.75)
 mesh = SubResource("BoxMesh_04o30")
+
+[node name="BoomLocation" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)

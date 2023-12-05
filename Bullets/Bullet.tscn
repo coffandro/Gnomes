@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhe8m4w56e4xe"]
+
+[ext_resource type="ArrayMesh" uid="uid://cloa7a6mven0y" path="res://Models/Bullets/ammo_machinegun.obj" id="1_68aej"]
+[ext_resource type="Script" path="res://Bullets/Bullet.gd" id="1_dk4f8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mnfre"]
+size = Vector3(0.5, 0.75, 0.5)
+
+[node name="Bullet" type="Area3D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_dk4f8")
+
+[node name="AmmoMachinegun" type="MeshInstance3D" parent="."]
+transform = Transform3D(75, 0, 0, 0, 53.571, 0, 0, 0, 75, 0, 0, 0)
+mesh = ExtResource("1_68aej")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mnfre")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="exploded" from="." to="." method="_on_exploded"]

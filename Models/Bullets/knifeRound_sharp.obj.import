@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://rq4e41o1xkfn"
+path="res://.godot/imported/knifeRound_sharp.obj-4fb4fa4b1d5031a37f361ee26acb6489.mesh"
+
+[deps]
+
+files=["res://.godot/imported/knifeRound_sharp.obj-4fb4fa4b1d5031a37f361ee26acb6489.mesh"]
+
+source_file="res://Models/Bullets/knifeRound_sharp.obj"
+dest_files=["res://.godot/imported/knifeRound_sharp.obj-4fb4fa4b1d5031a37f361ee26acb6489.mesh", "res://.godot/imported/knifeRound_sharp.obj-4fb4fa4b1d5031a37f361ee26acb6489.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

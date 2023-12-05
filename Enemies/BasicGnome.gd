@@ -24,3 +24,6 @@ func initialize(start_position, player_position):
 
 func _physics_process(delta):
 	move_and_slide()
+
+func hit():
+	queue_free()

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ds8m3tc3ncxxo"
+path="res://.godot/imported/machinegun.obj-326142e31fc8efaf38d5cf3b2368dbd9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/machinegun.obj-326142e31fc8efaf38d5cf3b2368dbd9.mesh"]
+
+source_file="res://Models/Bullets/machinegun.obj"
+dest_files=["res://.godot/imported/machinegun.obj-326142e31fc8efaf38d5cf3b2368dbd9.mesh", "res://.godot/imported/machinegun.obj-326142e31fc8efaf38d5cf3b2368dbd9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

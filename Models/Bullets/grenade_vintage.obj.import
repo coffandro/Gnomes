@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cisyr71kwr3ke"
+path="res://.godot/imported/grenade_vintage.obj-3cf23707d644df8d6f75886a56092a89.mesh"
+
+[deps]
+
+files=["res://.godot/imported/grenade_vintage.obj-3cf23707d644df8d6f75886a56092a89.mesh"]
+
+source_file="res://Models/Bullets/grenade_vintage.obj"
+dest_files=["res://.godot/imported/grenade_vintage.obj-3cf23707d644df8d6f75886a56092a89.mesh", "res://.godot/imported/grenade_vintage.obj-3cf23707d644df8d6f75886a56092a89.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
