@@ -8,14 +8,18 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const ray_length = 1000
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		var mousepos = ScreenPointToRay()
-		look_at(mousepos, Vector3.UP)
-	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		var b = Bullet.instantiate()
-		owner.add_child(b)
-		b.transform = $BoomLocation.global_transform
-		b.velocity = -b.transform.basis.z * b.muzzle_velocity
+	if Global.Death == false:
+		if event is InputEventMouseMotion:
+			var mousepos = ScreenPointToRay()
+			mousepos.y = 2
+			if mousepos.z >= -4.5 or mousepos.x <= -7.5 or mousepos.x >= 7.5:
+				look_at(mousepos, Vector3.UP)
+		if event is InputEventMouseButton and event.pressed and event.button_index == 1 and $Cooldown.is_stopped():
+			$Cooldown.start()
+			var b = Bullet.instantiate()
+			owner.add_child(b)
+			b.transform = $BoomLocation.global_transform
+			b.velocity = -b.transform.basis.z * b.muzzle_velocity
 
 func ScreenPointToRay():
 	var spaceState = get_world_3d().direct_space_state

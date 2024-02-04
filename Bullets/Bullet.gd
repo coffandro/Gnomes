@@ -3,7 +3,7 @@ extends Area3D
 signal exploded
 
 @export var muzzle_velocity = 25
-@export var g = Vector3.DOWN * 20
+@export var g = Vector3.DOWN * 10
 
 var velocity = Vector3.ZERO
 
@@ -19,3 +19,8 @@ func _on_body_entered(body):
 		body.hit()
 	emit_signal("exploded", transform.origin)
 	queue_free()
+
+
+func Remove_Bullet():
+	queue_free()
+

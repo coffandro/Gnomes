@@ -4,19 +4,25 @@
 [ext_resource type="Script" path="res://Bullets/Bullet.gd" id="1_dk4f8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnfre"]
-size = Vector3(0.5, 0.75, 0.5)
 
-[node name="Bullet" type="Area3D"]
+[node name="Bullet" type="Area3D" groups=["Bullets"]]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_dk4f8")
+g = Vector3(0, 0, 0)
 
 [node name="AmmoMachinegun" type="MeshInstance3D" parent="."]
-transform = Transform3D(75, 0, 0, 0, 53.571, 0, 0, 0, 75, 0, 0, 0)
+transform = Transform3D(-4.29904e-13, 7.02499e-06, 75, -75, -2.34166e-06, 2.75289e-20, 3.27835e-06, -53.571, 9.83506e-06, 0, 0, 0)
 mesh = ExtResource("1_68aej")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-5.73206e-15, 1.31134e-07, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 1.31134e-07, 0, 0, 0)
 shape = SubResource("BoxShape3D_mnfre")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="exploded" from="." to="." method="_on_exploded"]
+[connection signal="timeout" from="Timer" to="." method="Remove_Bullet"]

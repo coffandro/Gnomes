@@ -2,15 +2,29 @@ extends Node
 
 @export var mob_scene: PackedScene
 
+var Round = 0
+var MobSpeed = 5.0
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	$UserInterface/ProgressBar.value = Global.Health
+func _process(_delta):
+	$Castle/UserInterface/HealthBar.value = Global.Health
+	$Castle/UserInterface/HealthLabel.text = "Armor: %s" % Global.Health
+	$UserInterface/ScoreLabel.text = "Souls: %s" % Global.Score
+	$UserInterface/DeathScreen/TotalScoreLabel.text = "But you collected %s souls" % Global.Score
+	print("Round %s" % Round)
+	print($MobTimer.get_time_left())
+	print($RoundTimer.get_time_left())
 
 # Called when an enemy hits the castle
 func _on_castle_body_entered(body):
 	if body.is_in_group("Enemies"):
-		Global.Health -= 1
-		body.queue_free()
+		if Global.Death == false:
+			Global.Health -= 1
+			body.queue_free()
+			if Global.Health == 0:
+				Global.Dead()
+		else:
+			body.queue_free()
 
 
 func _on_mob_timer_timeout():
@@ -24,7 +38,22 @@ func _on_mob_timer_timeout():
 	mob_spawn_location.progress_ratio = randf()
 
 	var Castle_position = $Castle.position
-	mob.initialize(mob_spawn_location.position, Castle_position)
+	mob.initialize(mob_spawn_location.position, Castle_position, MobSpeed)
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+
+
+func _on_bullet_remover_body_exited(body):
+	if body.is_in_group("Bullets"):
+		body.Remove_Bullet()
+
+
+func _on_round_timer_timeout():
+	if Round == 0:
+		$RoundTimer.wait_time = 30
+		$MobTimer.start()
+		$RoundTimer.start()
+	elif Round == 1:
+		MobSpeed = 10.0
+	Round += 1
