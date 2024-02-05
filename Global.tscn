@@ -4,3 +4,5 @@
 
 [node name="Global" type="Node"]
 script = ExtResource("1_8dmfq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -11,7 +11,7 @@ func _input(event):
 	if Global.Death == false:
 		if event is InputEventMouseMotion:
 			var mousepos = ScreenPointToRay()
-			mousepos.y = 2
+			mousepos.y = 1
 			if mousepos.z >= -4.5 or mousepos.x <= -7.5 or mousepos.x >= 7.5:
 				look_at(mousepos, Vector3.UP)
 		if event is InputEventMouseButton and event.pressed and event.button_index == 1 and $Cooldown.is_stopped():

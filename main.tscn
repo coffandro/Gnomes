@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://du4lp0lo65yne"]
+[gd_scene load_steps=12 format=3 uid="uid://du4lp0lo65yne"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_3c688"]
-[ext_resource type="PackedScene" uid="uid://cv24smonewnfn" path="res://Enemies/BasicGnome.tscn" id="2_f61yo"]
+[ext_resource type="PackedScene" uid="uid://cv24smonewnfn" path="res://Enemies/BasicGnome.tscn" id="2_4cc3o"]
 [ext_resource type="PackedScene" uid="uid://xin02ce8ux4s" path="res://Player.tscn" id="3_0yx3y"]
 [ext_resource type="Theme" uid="uid://dt7x1n4moaku4" path="res://UserInterface.tres" id="3_42aov"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_54k12"]
-size = Vector3(60, 20, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_frml5"]
 size = Vector3(60, 1, 40)
@@ -34,17 +31,11 @@ point_count = 5
 
 [node name="Main" type="Node" groups=["World"]]
 script = ExtResource("1_3c688")
-mob_scene = ExtResource("2_f61yo")
+mob_scene = ExtResource("2_4cc3o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 9, 3)
 fov = 100.0
-
-[node name="BulletRemover" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletRemover"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.5, -5)
-shape = SubResource("BoxShape3D_54k12")
 
 [node name="Ground" type="StaticBody3D" parent="." groups=["World"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
@@ -179,14 +170,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -151.0
+offset_left = -127.0
 offset_top = -68.0
-offset_right = 151.0
+offset_right = 127.0
 offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_42aov")
-text = "But you collected X souls"
+text = "You collected X souls"
 
 [node name="GoodLuckLabel" type="Label" parent="UserInterface/DeathScreen"]
 layout_mode = 1
@@ -204,10 +195,55 @@ grow_vertical = 2
 theme = ExtResource("3_42aov")
 text = "Better luck next time"
 
+[node name="ColorRect" type="ColorRect" parent="UserInterface/DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
+
+[node name="ShopButton" type="Button" parent="UserInterface/DeathScreen/ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -37.5
+offset_right = 80.0
+offset_bottom = 37.5
+grow_vertical = 2
+text = "Shop"
+
+[node name="RetryButton" type="Button" parent="UserInterface/DeathScreen/ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -37.5
+offset_right = -5.0
+offset_bottom = 37.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Retry
+"
+
 [node name="Player" parent="." instance=ExtResource("3_0yx3y")]
 transform = Transform3D(-8.73049e-05, 0, -1, 0, 1, 0, 1, 0, -8.73049e-05, 0, 3, -10)
 
-[connection signal="body_exited" from="BulletRemover" to="." method="_on_bullet_remover_body_exited"]
 [connection signal="body_entered" from="Castle" to="." method="_on_castle_body_entered"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
+[connection signal="pressed" from="UserInterface/DeathScreen/ColorRect/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="UserInterface/DeathScreen/ColorRect/RetryButton" to="." method="_on_retry_button_pressed"]

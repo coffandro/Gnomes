@@ -10,7 +10,7 @@ func _process(_delta):
 	$Castle/UserInterface/HealthBar.value = Global.Health
 	$Castle/UserInterface/HealthLabel.text = "Armor: %s" % Global.Health
 	$UserInterface/ScoreLabel.text = "Souls: %s" % Global.Score
-	$UserInterface/DeathScreen/TotalScoreLabel.text = "But you collected %s souls" % Global.Score
+	$UserInterface/DeathScreen/TotalScoreLabel.text = "You collected %s souls" % Global.Score
 	print("Round %s" % Round)
 	print($MobTimer.get_time_left())
 	print($RoundTimer.get_time_left())
@@ -44,16 +44,25 @@ func _on_mob_timer_timeout():
 	add_child(mob)
 
 
-func _on_bullet_remover_body_exited(body):
-	if body.is_in_group("Bullets"):
-		body.Remove_Bullet()
-
-
 func _on_round_timer_timeout():
 	if Round == 0:
-		$RoundTimer.wait_time = 30
+		#$RoundTimer.wait_time = 5
 		$MobTimer.start()
 		$RoundTimer.start()
 	elif Round == 1:
-		MobSpeed = 10.0
+		MobSpeed = 7.5
+	elif Round == 2:
+		MobSpeed = 10
+	elif Round == 3:
+		MobSpeed = 12.5
+	elif Round == 4:
+		MobSpeed = 15
 	Round += 1
+
+
+func _on_shop_button_pressed():
+	Global.Change_Scene("Shop", 0)
+
+
+func _on_retry_button_pressed():
+	get_tree().reload_scene()

@@ -5,7 +5,7 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnfre"]
 
-[node name="Bullet" type="Area3D" groups=["Bullets"]]
+[node name="Bullet" type="Area3D"]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_dk4f8")

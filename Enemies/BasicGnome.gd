@@ -8,6 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 # This function will be called from the Main scene.
 func initialize(start_position, player_position, SPEED):
+	$Pivot/StrongGnome/AnimationPlayer.play("Run")
 	# We position the mob by placing it at start_position
 	# and rotate it towards player_position, so it looks at the player.
 	look_at_from_position(start_position, player_position, Vector3.UP)
